@@ -85,11 +85,19 @@ def move_files(instance, domain, target_dir, use_vanilla):
                            " that no external files were needed. Something is wrong.".format(base_dir))
 
     if not use_vanilla:
-        # The ad-hoc external definitions file - if it does not exist, we use the default.
+       # The ad-hoc external definitions file - if it does not exist, we use the default.
         if is_external_defined:
             shutil.copy(base_dir + '/external.hxx', target_dir)
-            if os.path.isfile(base_dir + '/external.cxx'):  # We also copy a possible cxx implementation file
-                shutil.copy(base_dir + '/external.cxx', target_dir)
+        if os.path.isfile(base_dir + '/external.cxx'):  # We also copy a possible cxx implementation file
+            shutil.copy(base_dir + '/external.cxx', target_dir)
+        if os.path.isfile(base_dir + '/translating.hxx'):  # We also copy a possible cxx implementation file
+            shutil.copy(base_dir + '/translating.hxx', target_dir)
+        if os.path.isfile(base_dir + '/epistemic_checker.cxx'):  # We also copy a possible cxx implementation file
+            shutil.copy(base_dir + '/epistemic_checker.cxx', target_dir)
+        if os.path.isfile(base_dir + '/epistemic_checker.hxx'):  # We also copy a possible cxx implementation file
+            shutil.copy(base_dir + '/epistemic_checker.hxx', target_dir)
+        if os.path.isfile(base_dir + '/domain.hxx'):  # We also copy a possible cxx implementation file
+            shutil.copy(base_dir + '/domain.hxx', target_dir)
 
         else:
             default = tplManager.get('external_default.hxx').substitute()  # No substitutions for the default template
